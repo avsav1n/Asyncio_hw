@@ -57,6 +57,9 @@ async def refresh_db_state():
     """
     async with engine.begin() as connection:
         await connection.run_sync(Base.metadata.drop_all)
+        print("Database dropped")
         await connection.run_sync(Base.metadata.create_all)
+        print("Database created")
+
     yield
     await engine.dispose()
